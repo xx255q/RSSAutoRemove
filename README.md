@@ -4,23 +4,40 @@ BitTorrent Auto-Remove Script
 This script is designed to automatically remove torrent downloads from a specific RSS feed in qBittorrent after a set amount of time (1 day by default).
 
 Features
+
 Connects to qBittorrent WebUI using user-specified connection details (IP address, port, username, and password).
+
 Monitors torrents downloaded from a specific RSS feed.
+
 Automatically removes the torrents (without deleting files) after a specified time period (1 day by default).
+
 Generates a log file with information about removed torrents.
+
 Provides a user prompt to cancel the rule if the script is already running.
+
 Prerequisites
+
 Python 3.6 or higher installed on your system.
 qBittorrent installed and configured with WebUI access.
+
 Installation
+
 Download the script file auto_remove_qbittorrent.py to your local machine.
+
 Open the script file with a text editor and update the following variables with your qBittorrent WebUI connection details and RSS feed URL:
+
 IP_ADDRESS
+
 PORT
+
 USERNAME
+
 PASSWORD
+
 RSS_FEED_URL
+
 Usage
+
 Open a command prompt or terminal window.
 Navigate to the directory containing the auto_remove_qbittorrent.py script.
 Run the script using the following command: python auto_remove_qbittorrent.py
