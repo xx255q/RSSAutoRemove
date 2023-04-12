@@ -8,14 +8,18 @@ import qbittorrentapi
 from pathlib import Path
 
 # Configuration
-ip_address = 'ip address'
+ip_address = 'IP'
 webui_port = 8999
-webui_username = 'username'
-webui_password = 'password'
-rss_feed_url = 'URL'
+webui_username = 'Username'
+webui_password = 'Password'
+rss_feed_url = 'RSS URL'
+
+# Set up the script directory
+script_directory = "Whatever directory"
 
 # Set up logging
-logging.basicConfig(filename='torrent_rule.log', level=logging.INFO, format='%(asctime)s %(message)s')
+log_path = os.path.join(script_directory, "torrent_rule.log")
+logging.basicConfig(filename=log_path, level=logging.INFO, format='%(asctime)s %(message)s')
 
 # Connect to qBittorrent
 try:
@@ -23,9 +27,9 @@ try:
     qbt_client.auth_log_in()
     print("Connected to qBittorrent.")
     logging.info("Connected to qBittorrent.")
-except qbittorrentapi.LoginFailed as e:
-    print("Connection to qBittorrent failed. Please check your credentials.")
-    logging.error("Connection to qBittorrent failed: %s", e)
+except Exception as e:
+    print(f"Unexpected error: {type(e).__name__} - {str(e)}")
+    logging.error("Unexpected error: %s - %s", type(e).__name__, e)
     sys.exit(1)
 
 # Function to remove torrents older than 1 day
@@ -40,9 +44,11 @@ def remove_old_torrents():
 schedule.every(1).days.at("00:00").do(remove_old_torrents)
 
 # Check if the rule exists and run or cancel the rule
-rule_file = Path("torrent_rule.json")
+rule_file_path = os.path.join(script_directory, "torrent_rule.json")
+rule_file = Path(rule_file_path)
+
 if rule_file.is_file():
-    with open("torrent_rule.json", "r") as f:
+    with open(rule_file_path, "r") as f:
         rule = json.load(f)
         if rule["running"]:
             choice = input("The rule is already running. Would you like to cancel it? (Y/N): ")
@@ -61,7 +67,7 @@ else:
     logging.info("Rule created and is now running.")
 
 # Save rule status
-with open("torrent_rule.json", "w") as f:
+with open(rule_file_path, "w") as f:
     json.dump(rule, f)
 
 # Run the scheduled tasks
