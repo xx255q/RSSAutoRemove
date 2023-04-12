@@ -15,10 +15,14 @@ Generates a log file with information about removed torrents.
 
 Provides a user prompt to cancel the rule if the script is already running.
 
+
+
 Prerequisites
 
 Python 3.6 or higher installed on your system.
 qBittorrent installed and configured with WebUI access.
+
+
 
 Installation
 
@@ -36,6 +40,8 @@ PASSWORD
 
 RSS_FEED_URL
 
+
+
 Usage
 
 Open a command prompt or terminal window.
@@ -51,6 +57,8 @@ The script will continue running in the background, monitoring torrents from the
 When a torrent reaches the specified time limit, it will be removed from qBittorrent and a log entry will be created in a file named removed_torrents.log in the same directory as the script.
 
 If you run the script again while it's already running, you will receive a prompt asking if you want to cancel the existing rule.
+
+
 
 Notes
 
